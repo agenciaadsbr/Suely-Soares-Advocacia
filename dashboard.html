@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Leads — Suely Soares</title>
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="assets/logo-mark.png">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0A0A0A;--card:#171717;--line:#262626;--txt:#F5F5F5;--mut:#A3A3A3;--dim:#737373;--acc:#25D366}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,system-ui,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px}
+h1{margin:0;font-size:20px;font-weight:600;letter-spacing:.04em}
+.sub{margin:6px 0 0;color:var(--mut);font-size:13px}
+.btn{background:transparent;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;cursor:pointer;min-height:36px}
+.btn:hover{border-color:#404040;background:#1F1F1F}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.card-h h2{margin:0;font-size:14px;font-weight:600}
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.filters label{display:flex;align-items:center;gap:6px}
+input[type=date],input[type=text],input[type=password]{background:#0F0F0F;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;color-scheme:dark}
+input:focus{outline:none;border-color:#525252}
+.chart-box{position:relative;height:300px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.legend b{color:var(--txt);font-weight:600}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid #1F1F1F;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right}
+.empty{color:var(--dim);text-align:center;padding:28px 12px}
+.wa{display:inline-flex;align-items:center;gap:6px;color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:12px}
+.wa:hover{border-color:var(--acc);color:var(--acc)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+/* login */
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login form{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.login h1{font-size:16px}
+.login label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--mut)}
+.login .btn{background:var(--txt);color:#0A0A0A;border-color:var(--txt);min-height:42px}
+.login .btn:hover{background:#D4D4D4}
+.err{color:#F87171;font-size:12px;min-height:16px;margin:0}
+.loading{color:var(--dim)}
+[hidden]{display:none !important}
+@media (max-width:640px){.wrap{padding:20px 14px 48px}.chart-box{height:240px}}
+</style>
+</head>
+<body>
+
+<section id="login" class="login" hidden>
+  <form id="login-form" autocomplete="on">
+    <h1>LEADS — SUELY SOARES</h1>
+    <p class="sub" style="margin:0">Acesso restrito</p>
+    <label>Usuário<input id="u" type="text" autocomplete="username" value="Admin" required></label>
+    <label>Senha<input id="p" type="password" autocomplete="current-password" required></label>
+    <p id="login-err" class="err" role="alert"></p>
+    <button class="btn" type="submit" id="login-btn">ENTRAR</button>
+  </form>
+</section>
+
+<main id="app" class="wrap" hidden>
+  <div class="top">
+    <div>
+      <h1>LEADS — SUELY SOARES</h1>
+      <p class="sub" id="total">Carregando…</p>
+    </div>
+    <button class="btn" id="logout">SAIR</button>
+  </div>
+
+  <div class="card">
+    <div class="card-h">
+      <h2>Evolução diária</h2>
+      <div class="filters">
+        <label>DE <input type="date" id="de"></label>
+        <label>ATÉ <input type="date" id="ate"></label>
+      </div>
+    </div>
+    <div class="chart-box"><canvas id="chart" aria-label="Gráfico de visitas, cadastros e taxa de conversão por dia" role="img"></canvas></div>
+    <div class="legend">
+      <span><i style="background:#E5E5E5"></i>Visitas <b id="l-vis">0</b></span>
+      <span><i style="background:#25D366"></i>Cadastros <b id="l-lead">0</b></span>
+      <span><i style="background:#737373"></i>Taxa de conversão <b id="l-conv">0%</b></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>Conversão por LP</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>LP</th><th class="num">Visitas</th><th class="num">Leads</th><th class="num">Conv.</th></tr></thead>
+        <tbody id="t-lp"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>Leads</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Nome</th><th>WhatsApp</th><th>LP</th><th>Origem</th><th>Data</th><th>Ação</th></tr></thead>
+        <tbody id="t-leads"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var C = window.LP_CONFIG;
+  var SITES = C.sites || [C.site];
+  var USERS = { admin: 'admin@' + C.site + '.adsbr.internal' };
+  var CLIENTE = C.cliente || 'Suely Soares Advocacia';
+  var sb = window.supabase.createClient(C.supabaseUrl, C.supabaseAnonKey, { auth: { persistSession: true, storageKey: 'lp-dash-' + C.site } });
+  var chart = null;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function brDate(iso) {
+    var d = new Date(iso);
+    return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+  function fmtPhone(d) {
+    d = String(d || '').replace(/\D/g, '');
+    if (d.length === 13 && d.indexOf('55') === 0) d = d.slice(2);
+    if (d.length === 11) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+    if (d.length === 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return d;
+  }
+  function waNumber(d) {
+    d = String(d || '').replace(/\D/g, '');
+    return (d.length === 10 || d.length === 11) ? '55' + d : d;
+  }
+  function pct(a, b) { return b ? (a / b * 100) : 0; }
+  function cell(tr, text, cls) { var td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+  function emptyRow(tbody, cols, msg) {
+    tbody.innerHTML = '';
+    var tr = document.createElement('tr'); var td = document.createElement('td');
+    td.colSpan = cols; td.className = 'empty'; td.textContent = msg; tr.appendChild(td); tbody.appendChild(tr);
+  }
+
+  async function fetchAll(table, cols, from, to) {
+    var out = [], page = 1000, i = 0;
+    while (true) {
+      var r = await sb.from(table).select(cols).in('site', SITES)
+        .gte('created_at', from.toISOString()).lt('created_at', to.toISOString())
+        .order('created_at', { ascending: false }).range(i, i + page - 1);
+      if (r.error) throw r.error;
+      out = out.concat(r.data || []);
+      if (!r.data || r.data.length < page) break;
+      i += page;
+    }
+    return out;
+  }
+
+  async function load() {
+    var de = $('de').value, ate = $('ate').value;
+    if (!de || !ate) return;
+    var from = new Date(de + 'T00:00:00');
+    var to = new Date(ate + 'T00:00:00'); to.setDate(to.getDate() + 1);
+    $('total').textContent = 'Carregando…';
+    try {
+      var res = await Promise.all([
+        fetchAll('lp_visits', 'site,created_at', from, to),
+        fetchAll('lp_leads', 'id,site,nome,whatsapp,origem,servico,created_at', from, to)
+      ]);
+      render(res[0], res[1], from, to);
+    } catch (e) {
+      $('total').textContent = 'Não foi possível carregar os dados.';
+      emptyRow($('t-leads'), 6, 'Nenhum lead encontrado');
+      emptyRow($('t-lp'), 4, 'Nenhum dado encontrado');
+      if (e && (e.status === 401 || /JWT/i.test(e.message || ''))) logout();
+    }
+  }
+
+  function render(visits, leads, from, to) {
+    $('total').textContent = leads.length + (leads.length === 1 ? ' lead no período' : ' leads no período');
+
+    // série diária
+    var days = [], idx = {};
+    for (var d = new Date(from); d < to; d.setDate(d.getDate() + 1)) { idx[ymd(d)] = days.length; days.push({ k: ymd(d), v: 0, l: 0 }); }
+    visits.forEach(function (x) { var k = ymd(new Date(x.created_at)); if (k in idx) days[idx[k]].v++; });
+    leads.forEach(function (x) { var k = ymd(new Date(x.created_at)); if (k in idx) days[idx[k]].l++; });
+    var labels = days.map(function (x) { var p = x.k.split('-'); return p[2] + '/' + p[1]; });
+    var conv = days.map(function (x) { return +pct(x.l, x.v).toFixed(1); });
+    $('l-vis').textContent = visits.length;
+    $('l-lead').textContent = leads.length;
+    $('l-conv').textContent = pct(leads.length, visits.length).toFixed(1).replace('.', ',') + '%';
+
+    var data = {
+      labels: labels,
+      datasets: [
+        { label: 'Visitas', data: days.map(function (x) { return x.v; }), borderColor: '#E5E5E5', backgroundColor: '#E5E5E5', yAxisID: 'y', tension: .3, pointRadius: 2, borderWidth: 2 },
+        { label: 'Cadastros', data: days.map(function (x) { return x.l; }), borderColor: '#25D366', backgroundColor: '#25D366', yAxisID: 'y', tension: .3, pointRadius: 2, borderWidth: 2 },
+        { label: 'Conversão %', data: conv, borderColor: '#737373', backgroundColor: '#737373', borderDash: [4, 4], yAxisID: 'y1', tension: .3, pointRadius: 0, borderWidth: 1.5 }
+      ]
+    };
+    var grid = { color: '#1F1F1F' }, ticks = { color: '#737373', font: { size: 11 } };
+    if (chart) { chart.data = data; chart.update(); }
+    else {
+      chart = new Chart($('chart'), {
+        type: 'line', data: data,
+        options: {
+          responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+          plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0A0A0A', borderColor: '#262626', borderWidth: 1 } },
+          scales: {
+            x: { grid: grid, ticks: ticks },
+            y: { beginAtZero: true, grid: grid, ticks: Object.assign({ precision: 0 }, ticks) },
+            y1: { beginAtZero: true, position: 'right', grid: { display: false }, ticks: Object.assign({ callback: function (v) { return v + '%'; } }, ticks) }
+          }
+        }
+      });
+    }
+
+    // conversão por LP
+    var by = {};
+    SITES.forEach(function (s) { by[s] = { v: 0, l: 0 }; });
+    visits.forEach(function (x) { (by[x.site] = by[x.site] || { v: 0, l: 0 }).v++; });
+    leads.forEach(function (x) { (by[x.site] = by[x.site] || { v: 0, l: 0 }).l++; });
+    var tlp = $('t-lp'); tlp.innerHTML = '';
+    var keys = Object.keys(by).filter(function (k) { return by[k].v || by[k].l; });
+    if (!keys.length) emptyRow(tlp, 4, 'Nenhum dado encontrado');
+    keys.forEach(function (k) {
+      var tr = document.createElement('tr');
+      cell(tr, k); cell(tr, by[k].v, 'num'); cell(tr, by[k].l, 'num');
+      cell(tr, pct(by[k].l, by[k].v).toFixed(1).replace('.', ',') + '%', 'num');
+      tlp.appendChild(tr);
+    });
+
+    // leads
+    var tb = $('t-leads'); tb.innerHTML = '';
+    if (!leads.length) return emptyRow(tb, 6, 'Nenhum lead encontrado');
+    leads.forEach(function (x) {
+      var tr = document.createElement('tr');
+      cell(tr, x.nome || '—');
+      cell(tr, fmtPhone(x.whatsapp));
+      cell(tr, x.site);
+      cell(tr, [x.origem, x.servico].filter(Boolean).join(' · ') || '—');
+      cell(tr, brDate(x.created_at));
+      var td = cell(tr, '');
+      var first = String(x.nome || '').trim().split(/\s+/)[0] || '';
+      var msg = 'Olá, ' + first + '. Recebemos seu contato através da ' + CLIENTE + ' e gostaria de dar continuidade ao seu atendimento.';
+      var a = document.createElement('a');
+      a.className = 'wa'; a.target = '_blank'; a.rel = 'noopener';
+      a.href = 'https://wa.me/' + waNumber(x.whatsapp) + '?text=' + encodeURIComponent(msg);
+      a.textContent = 'WhatsApp';
+      td.appendChild(a);
+      tb.appendChild(tr);
+    });
+  }
+
+  function showApp() { $('login').hidden = true; $('app').hidden = false; load(); }
+  function showLogin() { $('app').hidden = true; $('login').hidden = false; $('p').focus(); }
+  async function logout() { await sb.auth.signOut(); showLogin(); }
+
+  // período padrão: últimos 30 dias
+  var hoje = new Date(), ini = new Date(); ini.setDate(hoje.getDate() - 29);
+  $('de').value = ymd(ini); $('ate').value = ymd(hoje);
+  $('de').addEventListener('change', load); $('ate').addEventListener('change', load);
+  $('logout').addEventListener('click', logout);
+
+  $('login-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    $('login-err').textContent = '';
+    var user = $('u').value.trim().toLowerCase();
+    var email = USERS[user];
+    if (!email) { $('login-err').textContent = 'Usuário ou senha inválidos.'; return; }
+    $('login-btn').disabled = true;
+    var r = await sb.auth.signInWithPassword({ email: email, password: $('p').value });
+    $('login-btn').disabled = false;
+    if (r.error) { $('login-err').textContent = 'Usuário ou senha inválidos.'; return; }
+    showApp();
+  });
+
+  sb.auth.getSession().then(function (r) { if (r.data && r.data.session) showApp(); else showLogin(); });
+})();
+</script>
+</body>
+</html>
