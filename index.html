@@ -95,7 +95,7 @@ a{color:#723E47}a:hover{color:#4E2830}
 .ticker-group b{width:8px;height:8px;transform:rotate(45deg);background:var(--metal);flex:none}
 .ticker:hover .ticker-track{animation-play-state:paused}
 /* sections */
-.sec{padding:84px 0;position:relative}
+.sec{padding:84px 0;position:relative;scroll-margin-top:60px}
 .sec h2{font-size:36px;color:var(--wine)}
 .lead{font-size:17px;color:#4A383C;margin:18px 0 0}
 .prob-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
@@ -319,7 +319,7 @@ a{color:#723E47}a:hover{color:#4E2830}
 <a class="navlink" href="#duvidas">Dúvidas frequentes</a>
 <a class="navlink" href="#contato">Contato</a>
 </nav>
-<a class="btn btn-green hdr-cta" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="header" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+<a class="btn btn-green hdr-cta" href="#contato" data-cta="header">Falar pelo WhatsApp</a>
 <button class="burger" type="button" aria-label="Abrir menu" aria-controls="menu-mobile" aria-expanded="false" id="burger">
 <span class="ic-close" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>
 <span class="ic-open"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg></span>
@@ -332,7 +332,7 @@ a{color:#723E47}a:hover{color:#4E2830}
 <a class="navlink" href="#como-funciona">Como funciona</a>
 <a class="navlink" href="#duvidas">Dúvidas frequentes</a>
 <a class="navlink" href="#contato">Contato</a>
-<a class="btn btn-green" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="menu" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+<a class="btn btn-green" href="#contato" data-cta="menu">Falar pelo WhatsApp</a>
 </nav>
 </div>
 </header>
@@ -348,7 +348,7 @@ a{color:#723E47}a:hover{color:#4E2830}
 <h1 class="serif" id="hero-title"><span class="ln"><span>Direito de Trânsito</span></span></h1>
 <p class="hero-sub">Defesa em processos de suspensão e cassação da CNH, recursos de multas e autuações da Lei Seca. Conheça as possibilidades de defesa para o seu caso.</p>
 <div class="hero-ctas">
-<a class="btn btn-green" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="hero" target="_blank" rel="noopener">
+<a class="btn btn-green" href="#contato" data-cta="hero">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.3A8.4 8.4 0 1 1 21 11.5z"></path><path d="M9 9.5c.3 1.9 2.6 4.3 4.6 4.6l1.2-1.1 2 1"></path></svg>
 Falar com a Dra. Suely
 </a>
@@ -396,7 +396,7 @@ Falar com a Dra. Suely
 </ul>
 <div class="pclose rv">
 <p>Cada situação exige uma análise específica. Conhecer as possibilidades de defesa é o primeiro passo.</p>
-<a class="btn btn-green" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="problema" target="_blank" rel="noopener" style="align-self: flex-start; position: relative; z-index: 1">Apresentar minha situação <span class="arr" aria-hidden="true">→</span></a>
+<a class="btn btn-green" href="#contato" data-cta="problema" style="align-self: flex-start; position: relative; z-index: 1">Apresentar minha situação <span class="arr" aria-hidden="true">→</span></a>
 </div>
 </div>
 </div>
@@ -491,7 +491,7 @@ Falar com a Dra. Suely
 <li class="step rv"><span class="step-rail"></span><span class="km">03</span><h3>Conheça as possibilidades</h3><p>Após a análise, você recebe orientação sobre as alternativas jurídicas aplicáveis à sua situação.</p></li>
 </ol>
 <div class="steps-foot rv">
-<a class="btn btn-green" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="etapas" target="_blank" rel="noopener">Enviar mensagem pelo WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+<a class="btn btn-green" href="#contato" data-cta="etapas">Enviar mensagem pelo WhatsApp <span class="arr" aria-hidden="true">→</span></a>
 <p>Tenha à mão as notificações recebidas. Elas ajudam a entender o seu caso.</p>
 </div>
 </div>
@@ -527,7 +527,7 @@ Falar com a Dra. Suely
 <h2 class="serif" id="faq-title" style="margin-top: 18px">Perguntas que <em>chegam com frequência.</em></h2>
 <div class="faq-side">
 <p>As respostas são informativas e não substituem a análise do seu caso.</p>
-<a class="btn btn-green" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="faq" target="_blank" rel="noopener" style="width: 100%">Tirar uma dúvida</a>
+<a class="btn btn-green" href="#contato" data-cta="faq" style="width: 100%">Tirar uma dúvida</a>
 </div>
 </div>
 <div class="faq-list rv">
@@ -660,13 +660,13 @@ Falar pelo WhatsApp
 <div class="ftr-grid">
 <img class="ftr-logo" src="assets/logo-full-dark.png" alt="Suely Soares Advocacia e Consultoria Jurídica" width="150" height="150" loading="lazy">
 <div><p style="margin: 0; color: #FFFFFF; font-weight: 700">Suely Soares Advocacia e Consultoria Jurídica</p><p style="margin: 8px 0 0">Dra. Suely Soares · Direito de Trânsito · Atendimento no estado da Paraíba</p></div>
-<div><p style="margin: 0">WhatsApp: <a href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="footer" target="_blank" rel="noopener">(83) 99176-6666</a></p><p style="margin: 8px 0 0"><a href="#inicio">Voltar ao início ↑</a></p></div>
+<div><p style="margin: 0">WhatsApp: <a href="#contato" data-cta="footer">(83) 99176-6666</a></p><p style="margin: 8px 0 0"><a href="#inicio">Voltar ao início ↑</a></p></div>
 </div>
 <small>Conteúdo de caráter exclusivamente informativo, em conformidade com o Código de Ética e Disciplina da OAB e o Provimento nº 205/2021. As informações desta página não constituem promessa de resultado e não substituem a análise individual de cada caso.</small>
 </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/5583991766666?text=Ol%C3%A1!%20Acessei%20a%20p%C3%A1gina%20da%20Dra.%20Suely%20Soares%20e%20gostaria%20de%20obter%20orienta%C3%A7%C3%A3o%20sobre%20uma%20quest%C3%A3o%20relacionada%20ao%20meu%20direito%20de%20dirigir." data-wa="float" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp com a Dra. Suely Soares">
+<a class="wa-float" href="#contato" data-cta="float" aria-label="Falar com a Dra. Suely: ir para o formulário de contato">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.3A8.4 8.4 0 1 1 21 11.5z"></path><path d="M9 9.5c.3 1.9 2.6 4.3 4.6 4.6l1.2-1.1 2 1"></path></svg>
 </a>
 

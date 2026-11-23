@@ -3,7 +3,6 @@
   var C = window.LP_CONFIG || {};
   var REST = C.supabaseUrl + '/rest/v1/';
   var SITE = document.body.dataset.site || C.site;
-  var WA_MSG = 'Olá! Acessei a página da Dra. Suely Soares e gostaria de obter orientação sobre uma questão relacionada ao meu direito de dirigir.';
 
   function sget(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
   function sset(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
@@ -26,16 +25,7 @@
     if (stored.gclid) return 'google / cpc';
     return sget('ss_ref') || 'direto';
   }
-  function refSuffix() {
-    var p = [stored.utm_source, stored.utm_term, stored.utm_content].filter(Boolean);
-    return p.length ? '\n\n(ref: ' + p.join(' | ') + ')' : '';
-  }
-  function waLink(msg) {
-    return 'https://wa.me/' + (C.whatsapp || '5583991766666') + '?text=' + encodeURIComponent((msg || WA_MSG) + refSuffix());
-  }
 
-  // links de WhatsApp com a referência da campanha
-  document.querySelectorAll('[data-wa]').forEach(function (a) { a.href = waLink(); });
 
   // ---------- Supabase (REST) ----------
   function insert(table, row) {
@@ -58,14 +48,21 @@
     data = Object.assign({}, stored, data || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({ event: name }, data));
-    if (typeof window.fbq === 'function' && name === 'whatsapp_click') {
-      window.fbq('track', 'Contact', { content_name: data.position });
-      window.fbq('trackCustom', 'WhatsAppClick', data);
+    if (typeof window.fbq === 'function' && name === 'cta_click') {
+      window.fbq('trackCustom', 'CTAClick', data);
     }
   }
+  // todos os CTAs levam ao formulário (#contato) e posicionam o cursor no campo de nome
   document.addEventListener('click', function (e) {
-    var wa = e.target.closest('[data-wa]');
-    if (wa) track('whatsapp_click', { position: wa.getAttribute('data-wa') });
+    var cta = e.target.closest('[data-cta]');
+    if (!cta) return;
+    e.preventDefault();
+    track('cta_click', { position: cta.getAttribute('data-cta') });
+    var sec = document.getElementById('contato');
+    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#contato');
+    var inp = document.getElementById('f-nome');
+    if (inp) setTimeout(function () { try { inp.focus({ preventScroll: true }); } catch (x) {} }, 700);
   });
 
   // ---------- menu mobile ----------
