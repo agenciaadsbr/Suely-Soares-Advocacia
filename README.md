@@ -1,4 +1,4 @@
-# LP Suely Soares Advocacia — Direito de Trânsito (PB)
+# LP Suely Soares Advocacia — Direito de Trânsito (atendimento em todo Brasil)
 
 Landing page estática (HTML/CSS/JS) — ADS BR.
 
